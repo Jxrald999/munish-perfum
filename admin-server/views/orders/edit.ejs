@@ -1,0 +1,108 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">Pedido <%= order.order_number %></h4>
+  <a href="/orders" class="btn btn-outline-secondary btn-sm">← Volver</a>
+</div>
+
+<div class="row g-4">
+  <div class="col-md-8">
+    <div class="card border-0 shadow-sm mb-4">
+      <div class="card-header bg-white fw-bold">Información del Cliente</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6"><strong>Nombre:</strong> <%= order.customer_name %></div>
+          <div class="col-md-6"><strong>Email:</strong> <%= order.customer_email %></div>
+          <div class="col-md-6"><strong>Teléfono:</strong> <%= order.customer_phone %></div>
+          <div class="col-md-6"><strong>Cédula:</strong> <%= order.id_number || '-' %></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
+      <div class="card-header bg-white fw-bold">Dirección de Envío</div>
+      <div class="card-body">
+        <p class="mb-1"><%= order.province %>, <%= order.canton %>, <%= order.district %></p>
+        <p class="mb-1"><%= order.address %></p>
+        <% if (order.notes) { %><p class="text-muted mt-2"><strong>Notas:</strong> <%= order.notes %></p><% } %>
+      </div>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-white fw-bold">Productos</div>
+      <div class="card-body p-0">
+        <table class="table mb-0">
+          <thead><tr><th>Producto</th><th>Tamaño</th><th>Cant.</th><th>Precio</th></tr></thead>
+          <tbody>
+            <% if (order.items) {
+              const items = typeof order.items === 'string' ? JSON.parse(order.items) : order.items;
+              if (Array.isArray(items)) { items.forEach(item => { %>
+                <tr>
+                  <td><%= item.name || item.product || '-' %></td>
+                  <td><%= item.size || '-' %></td>
+                  <td><%= item.quantity || 1 %></td>
+                  <td>₡<%= Number(item.price || 0).toLocaleString('es-CR') %></td>
+                </tr>
+              <% })}}
+            %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card border-0 shadow-sm mt-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between"><span>Subtotal:</span><span>₡<%= Number(order.subtotal).toLocaleString('es-CR') %></span></div>
+        <div class="d-flex justify-content-between"><span>Envío:</span><span><%= order.shipping > 0 ? '₡' + Number(order.shipping).toLocaleString('es-CR') : 'Gratis' %></span></div>
+        <div class="d-flex justify-content-between"><span>IVA (13%):</span><span>₡<%= Number(order.tax).toLocaleString('es-CR') %></span></div>
+        <hr>
+        <div class="d-flex justify-content-between fw-bold fs-5"><span>Total:</span><span>₡<%= Number(order.total).toLocaleString('es-CR') %></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <form method="POST" class="card border-0 shadow-sm">
+      <div class="card-header bg-white fw-bold">Gestión del Pedido</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label class="form-label">Estado</label>
+          <select name="status" class="form-select">
+            <% ['pending','confirmed','processing','shipped','delivered','cancelled'].forEach(s => { %>
+              <option value="<%= s %>" <%= order.status === s ? 'selected' : '' %>><%= {pending:'Pendiente',confirmed:'Confirmado',processing:'En Preparación',shipped:'Enviado',delivered:'Entregado',cancelled:'Cancelado'}[s] %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Estado del Pago</label>
+          <select name="payment_status" class="form-select">
+            <% ['pending','confirmed','failed','refunded'].forEach(s => { %>
+              <option value="<%= s %>" <%= order.payment_status === s ? 'selected' : '' %>><%= {pending:'Pendiente',confirmed:'Confirmado',failed:'Fallido',refunded:'Reembolsado'}[s] %></option>
+            <% }) %>
+          </select>
+        </div>
+        <hr>
+        <div class="mb-3">
+          <label class="form-label">Empresa de Envío</label>
+          <input type="text" name="tracking_company" class="form-control" value="<%= order.tracking_company || '' %>">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Número de Guía</label>
+          <input type="text" name="tracking_number" class="form-control" value="<%= order.tracking_number || '' %>">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">URL de Seguimiento</label>
+          <input type="url" name="tracking_url" class="form-control" value="<%= order.tracking_url || '' %>">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Notas Internas</label>
+          <textarea name="admin_notes" class="form-control" rows="3"><%= order.admin_notes || '' %></textarea>
+        </div>
+        <button type="submit" class="btn btn-dark w-100"><i class="bi bi-check-lg"></i> Guardar</button>
+        <% if (order.customer_phone) { %>
+          <a href="https://wa.me/506<%= order.customer_phone.replace(/[^0-9]/g,'') %>?text=<%= encodeURIComponent('Hola ' + order.customer_name + ', tu pedido ' + order.order_number + ' está ' + order.status) %>" target="_blank" class="btn btn-success w-100 mt-2">
+            <i class="bi bi-whatsapp"></i> WhatsApp
+          </a>
+        <% } %>
+      </div>
+    </form>
+  </div>
+</div>

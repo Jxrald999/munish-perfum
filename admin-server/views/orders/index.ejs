@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">Pedidos</h4>
+</div>
+
+<form method="GET" class="row g-2 mb-3">
+  <div class="col-auto">
+    <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
+      <option value="">Todos los estados</option>
+      <% ['pending','confirmed','processing','shipped','delivered','cancelled'].forEach(s => { %>
+        <option value="<%= s %>" <%= currentStatus === s ? 'selected' : '' %>><%= {pending:'Pendiente',confirmed:'Confirmado',processing:'En Preparación',shipped:'Enviado',delivered:'Entregado',cancelled:'Cancelado'}[s] %></option>
+      <% }) %>
+    </select>
+  </div>
+</form>
+
+<div class="card border-0 shadow-sm">
+  <div class="table-responsive">
+    <table class="table table-hover mb-0">
+      <thead>
+        <tr><th># Pedido</th><th>Cliente</th><th>Total</th><th>Estado</th><th>Pago</th><th>Fecha</th><th></th></tr>
+      </thead>
+      <tbody>
+        <% if (orders.length === 0) { %>
+          <tr><td colspan="7" class="text-center text-muted py-4">No hay pedidos</td></tr>
+        <% } %>
+        <% orders.forEach(o => { %>
+          <tr>
+            <td><a href="/orders/<%= o.id %>"><%= o.order_number || 'ORD-' + o.id %></a></td>
+            <td><%= o.customer_name || '-' %></td>
+            <td>₡<%= Number(o.total).toLocaleString('es-CR') %></td>
+            <td>
+              <span class="badge <%= {pending:'bg-warning',confirmed:'bg-info',processing:'bg-primary',shipped:'bg-success',delivered:'bg-success',cancelled:'bg-danger'}[o.status] || 'bg-secondary' %>">
+                <%= {pending:'Pendiente',confirmed:'Confirmado',processing:'En Preparación',shipped:'Enviado',delivered:'Entregado',cancelled:'Cancelado'}[o.status] || o.status %>
+              </span>
+            </td>
+            <td><span class="badge bg-light text-dark"><%= o.payment_status %></span></td>
+            <td class="text-muted"><%= new Date(o.created_at).toLocaleDateString('es-CR') %></td>
+            <td><a href="/orders/<%= o.id %>" class="btn btn-sm btn-outline-dark">Ver</a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4 class="mb-0">Dashboard</h4>
+  <span class="text-muted"><%= user %></span>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-3">
+    <div class="card stat-card bg-primary text-white p-3">
+      <div class="d-flex justify-content-between">
+        <div>
+          <div class="fs-4 fw-bold"><%= totalProducts %></div>
+          <div class="small opacity-75">Productos</div>
+        </div>
+        <i class="bi bi-box fs-2 opacity-50"></i>
+      </div>
+      <div class="small mt-2 opacity-75"><%= activeProducts %> activos · <%= featuredProducts %> destacados</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="card stat-card bg-warning text-white p-3">
+      <div class="d-flex justify-content-between">
+        <div>
+          <div class="fs-4 fw-bold"><%= lowStock %></div>
+          <div class="small opacity-75">Stock Bajo</div>
+        </div>
+        <i class="bi bi-exclamation-triangle fs-2 opacity-50"></i>
+      </div>
+      <div class="small mt-2 opacity-75"><%= outOfStock %> agotados</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="card stat-card bg-info text-white p-3">
+      <div class="d-flex justify-content-between">
+        <div>
+          <div class="fs-4 fw-bold"><%= pendingOrders %></div>
+          <div class="small opacity-75">Pedidos Pendientes</div>
+        </div>
+        <i class="bi bi-cart fs-2 opacity-50"></i>
+      </div>
+      <div class="small mt-2 opacity-75"><%= totalOrders %> total</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="card stat-card bg-success text-white p-3">
+      <div class="d-flex justify-content-between">
+        <div>
+          <div class="fs-4 fw-bold">₡<%= Number(revenue).toLocaleString('es-CR') %></div>
+          <div class="small opacity-75">Ingresos</div>
+        </div>
+        <i class="bi bi-currency-dollar fs-2 opacity-50"></i>
+      </div>
+      <div class="small mt-2 opacity-75">Pedidos confirmados</div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-md-6">
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-white border-0 d-flex justify-content-between">
+        <strong>Pedidos Recientes</strong>
+        <a href="/orders" class="small">Ver todos</a>
+      </div>
+      <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+          <thead><tr><th>#</th><th>Cliente</th><th>Total</th><th>Estado</th></tr></thead>
+          <tbody>
+            <% if (recentOrders.length === 0) { %>
+              <tr><td colspan="4" class="text-center text-muted py-3">Sin pedidos aún</td></tr>
+            <% } %>
+            <% recentOrders.forEach(o => { %>
+              <tr>
+                <td><a href="/orders/<%= o.id %>"><%= o.order_number %></a></td>
+                <td><%= o.customer_name %></td>
+                <td>₡<%= Number(o.total).toLocaleString('es-CR') %></td>
+                <td><span class="badge bg-secondary badge-status"><%= o.status %></span></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-white border-0 d-flex justify-content-between">
+        <strong>Últimos Productos</strong>
+        <a href="/products" class="small">Ver todos</a>
+      </div>
+      <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+          <thead><tr><th></th><th>Producto</th><th>Stock</th><th>Precio</th></tr></thead>
+          <tbody>
+            <% recentProducts.forEach(p => { %>
+              <tr>
+                <td><img src="<%= getProductImage(p) %>" class="product-img"></td>
+                <td><%= p.title %></td>
+                <td>
+                  <span class="badge <%= p.stock <= 0 ? 'bg-danger' : p.stock <= 5 ? 'bg-warning' : 'bg-success' %>">
+                    <%= p.stock %>
+                  </span>
+                </td>
+                <td>₡<%= Number(p.price50ml || 0).toLocaleString('es-CR') %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

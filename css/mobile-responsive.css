@@ -1,0 +1,1101 @@
+/* MOBILE-RESPONSIVE.CSS - Optimización Mobile-First para Munish Perfum */
+/* Tema: LUJO Y AMPLITUD - Interfaz premium con espacios respirable */
+
+/* ============================================
+   CONTENEDORES Y LAYOUTS GENERALES
+   ============================================ */
+
+/* Asegurar que todos los contenedores sean fluidos en móviles */
+.container,
+.container-fluid {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+/* Grid responsive sin ancho fijo */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -16px;
+    margin-left: -16px;
+}
+
+[class*='col-'] {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+/* Espacios generosos entre secciones */
+section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+}
+
+/* ============================================
+   IMÁGENES RESPONSIVAS CON LUJO
+   ============================================ */
+
+img,
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Productos en Shop e Index: 90% ancho centrado con padding y bordes redondeados */
+.product-image,
+.product-img,
+.card-img,
+.cart-item-image img,
+.checkout-form-container img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* En shop.html: Imágenes del producto con aire */
+@media (max-width: 768px) {
+    .product-image {
+        width: 90%;
+        margin: 0 auto;
+        display: block;
+        padding: 8px;
+        border-radius: 12px;
+    }
+
+    .product-card img,
+    .product-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        padding-bottom: 8px;
+    }
+
+    /* Single product: imagen principal respirable */
+    .product-images img,
+    .single-product-image {
+        width: 90%;
+        max-width: 90%;
+        margin: 0 auto 20px;
+        display: block;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+}
+
+/* ============================================
+   HEADER Y NAVEGACIÓN MÓVIL
+   ============================================ */
+
+@media (max-width: 992px) {
+    #header {
+        padding: 12px 0;
+    }
+
+    .navbar-brand,
+    .brand-name {
+        font-size: 1.3rem;
+    }
+
+    .cart-link {
+        font-size: 0.9rem;
+    }
+
+    .cart-icon {
+        font-size: 1.3rem;
+    }
+
+    .navbar-toggler {
+        padding: 0.25rem 0.75rem;
+    }
+    /* Visibilidad menú mobile: texto negro en menú desplegado */
+    .navbar-nav.show .nav-link,
+    .navbar-nav .nav-link:active,
+    .navbar-nav .nav-link:focus,
+    .navbar-nav .nav-link:visited {
+        color: #000 !important;
+    }
+    /* Carrito y badge visibles en mobile */
+    .cart-icon,
+    .cart-badge {
+        color: #000 !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-brand,
+    .brand-name {
+        font-size: 1.1rem;
+    }
+
+    .cart-link {
+        margin-left: auto;
+    }
+
+    .offcanvas-header {
+        padding: 12px;
+    }
+
+    .offcanvas-body {
+        padding: 12px;
+    }
+
+    .nav-link {
+        padding: 10px 0 !important;
+        font-size: 0.95rem;
+    }
+}
+
+/* ============================================
+   FORMULARIOS - CHECKOUT CON LUJO Y ESPACIO
+   ============================================ */
+
+@media (max-width: 768px) {
+    .checkout-form-container {
+        padding: 24px 18px;
+        border-radius: 12px;
+        background: white;
+    }
+
+    .checkout-form-container h2 {
+        font-size: 1.4rem;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #e9ecef;
+        line-height: 1.6;
+    }
+
+    .form-section {
+        margin-bottom: 28px;
+        padding: 20px 16px;
+        background: #f9fafb;
+        border-radius: 10px;
+        border-left: 4px solid #74909B;
+    }
+
+    .section-title {
+        font-size: 1.05rem;
+        margin-bottom: 20px;
+        color: #333;
+        font-weight: 600;
+        line-height: 1.6;
+    }
+
+    .form-label {
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+        color: #495057;
+        font-weight: 500;
+        display: block;
+        line-height: 1.6;
+    }
+
+    /* Inputs con espacios generosos */
+    .form-control,
+    .form-select,
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="file"],
+    textarea {
+        width: 100%;
+        padding: 14px 14px;
+        font-size: 16px; /* Prevenir zoom en iOS */
+        border-radius: 8px;
+        border: 1.5px solid #ddd;
+        background: white;
+        margin-bottom: 20px; /* ESPACIOS GENEROSOS ENTRE CAMPOS */
+        transition: all 0.3s ease;
+        line-height: 1.6;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #74909B;
+        box-shadow: 0 0 0 3px rgba(116, 144, 155, 0.1);
+        outline: none;
+    }
+
+    /* Input del número SINPE - destacado */
+    #sinpe-reference {
+        margin-bottom: 20px;
+        border: 1.5px solid #74909B;
+        background: #f0f4f6;
+    }
+
+    #sinpe-reference::placeholder {
+        color: #999;
+        opacity: 0.7;
+    }
+
+    .row [class*='col-'] {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .col-md-6 {
+        width: 100%;
+    }
+
+    .form-section .row {
+        flex-direction: column;
+    }
+
+    /* Small text helper bajo inputs */
+    small.text-muted {
+        display: block;
+        margin-top: -16px;
+        margin-bottom: 16px;
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+}
+
+/* ============================================
+   BOTONES - TAMAÑO TÁCTIL Y LUJO
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Contenedor de botones con aire lateral */
+    .form-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 32px;
+        padding: 24px 0;
+    }
+
+    .btn {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 1rem;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-bottom: 0; /* No necesita margin porque gap del contenedor lo maneja */
+        line-height: 1.6;
+    }
+
+    .btn-lg {
+        min-height: 52px;
+        padding: 16px 20px;
+        font-size: 1.05rem;
+    }
+
+    .btn-sm {
+        min-height: 40px;
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+
+    /* Botón de confirmación prominente (Confirmar Pago, Proceder) */
+    .btn-success,
+    .btn-primary {
+        width: 100%;
+        background: linear-gradient(135deg, #74909B 0%, #5a7a8a 100%);
+        border: none;
+        box-shadow: 0 4px 15px rgba(116, 144, 155, 0.2);
+    }
+
+    .btn-success:hover,
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(116, 144, 155, 0.3);
+    }
+
+    .btn-success:active,
+    .btn-primary:active {
+        transform: translateY(0);
+    }
+
+    /* Botón secundario (Volver, Editar) */
+    .btn-outline-secondary,
+    .btn-dark {
+        width: 100%;
+        border: 1.5px solid #74909B;
+        color: #74909B;
+        background: white;
+    }
+
+    .btn-outline-secondary:hover,
+    .btn-dark:hover {
+        background: #f9fafb;
+    }
+
+    /* Botón de vaciar carrito */
+    .btn-danger {
+        width: 100%;
+    }
+
+    /* Espacios entre botones en contenedores */
+    .form-actions .btn {
+        margin-bottom: 0;
+    }
+
+    /* Prevenir que botones estén pegados a los bordes */
+    @media (max-width: 576px) {
+        .btn {
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+}
+
+/* ============================================
+   TABLAS EN CARRITO - TARJETAS DE LUJO
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Carrito: convertir tablas en tarjetas elegantes */
+    .cart-item {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 20px;
+        border-bottom: none;
+        background: white;
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    .cart-item:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+    }
+
+    .cart-item-image {
+        width: 100%;
+        height: 220px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .cart-item-details,
+    .cart-item-quantity,
+    .cart-item-actions {
+        width: 100%;
+    }
+
+    .cart-item-details h5 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        line-height: 1.6;
+    }
+
+    .cart-item-price {
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-top: 12px;
+    }
+
+    .cart-quantity-input {
+        width: 100%;
+        max-width: 140px;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    /* Tablas en checkout convertidas a cards */
+    table {
+        width: 100%;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table tbody tr {
+        display: block;
+        margin-bottom: 18px;
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        padding: 18px;
+        background: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        line-height: 1.6;
+    }
+
+    table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border: none;
+        line-height: 1.6;
+    }
+
+    table tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #495057;
+        font-size: 0.95rem;
+    }
+
+    table tbody td:first-child {
+        margin-bottom: 12px;
+        font-weight: 600;
+    }
+}
+
+/* ============================================
+   RESUMEN DE PEDIDO (CHECKOUT) - LUJO
+   ============================================ */
+
+@media (max-width: 992px) {
+    .order-summary {
+        margin-top: 40px;
+        background: white;
+        padding: 28px;
+        border-radius: 12px;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        bottom: 0;
+        z-index: 1000;
+    }
+
+    .order-summary h4 {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        color: #333;
+        font-weight: 600;
+        line-height: 1.6;
+        border-bottom: 2px solid #e9ecef;
+        padding-bottom: 15px;
+    }
+
+    .order-items {
+        max-height: 220px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+    }
+
+    .order-item {
+        padding: 12px 0 !important;
+        font-size: 0.95rem;
+        border-bottom: 1px solid #f0f0f0;
+        line-height: 1.6;
+    }
+
+    .order-item:last-child {
+        border-bottom: none;
+    }
+
+    .order-totals {
+        border-top: 2px solid #74909B;
+        padding-top: 18px;
+        margin-top: 18px;
+    }
+
+    .total-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        font-size: 0.98rem;
+        line-height: 1.6;
+    }
+
+    .total-final {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #74909B;
+        padding-top: 12px;
+        border-top: 1px solid #e9ecef;
+    }
+}
+
+@media (max-width: 768px) {
+    .order-summary {
+        position: relative;
+        bottom: auto;
+        margin-bottom: 28px;
+    }
+
+    .order-items {
+        max-height: none;
+    }
+}
+
+/* ============================================
+   CHECKOUT STEPS (PROGRESO)
+   ============================================ */
+
+@media (max-width: 768px) {
+    .checkout-steps {
+        gap: 10px;
+        padding: 20px 0;
+    }
+
+    .checkout-steps::before {
+        display: none;
+    }
+
+    .step {
+        min-width: auto;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        border-width: 2px;
+    }
+
+    .step span {
+        display: none;
+    }
+
+    /* Mostrar solo números en móviles */
+    .step.active span,
+    .step.completed span {
+        display: none;
+    }
+}
+
+/* ============================================
+   PAYMENT SCREEN - SINPE Y COMPROBANTE (LUJO)
+   ============================================ */
+
+@media (max-width: 768px) {
+    .payment-header {
+        padding: 28px 0;
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    .payment-header h2 {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+        line-height: 1.6;
+    }
+
+    .payment-header p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #6c757d;
+    }
+
+    .sinpe-instructions {
+        margin-bottom: 28px;
+    }
+
+    .sinpe-details {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        margin-bottom: 28px;
+    }
+
+    .detail-box {
+        background: #f9fafb;
+        padding: 18px;
+        border-radius: 10px;
+        border-left: 4px solid #74909B;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .detail-box label {
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        color: #6c757d;
+        font-weight: 500;
+        line-height: 1.6;
+    }
+
+    .detail-box strong {
+        display: block;
+        font-size: 1rem;
+        word-break: break-word;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .sinpe-number {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .sinpe-number button {
+        width: 100%;
+        min-height: 44px;
+    }
+
+    .total-amount {
+        background: linear-gradient(135deg, #e8f1f5 0%, #f3f8fa 100%);
+    }
+
+    .total-amount h3 {
+        font-size: 1.8rem;
+        color: #74909B;
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    .upload-proof {
+        margin-top: 28px;
+        padding-top: 28px;
+        border-top: 1px solid #e9ecef;
+    }
+
+    .upload-proof h5 {
+        font-size: 1.15rem;
+        margin-bottom: 20px;
+        color: #333;
+        font-weight: 600;
+        line-height: 1.6;
+    }
+
+    #sinpe-reference,
+    #payment-proof {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+}
+
+/* ============================================
+   CONFIRMATION SCREEN
+   ============================================ */
+
+@media (max-width: 768px) {
+    .confirmation-screen {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .confirmation-icon {
+        margin-bottom: 15px;
+    }
+
+    .confirmation-icon svg {
+        width: 60px;
+        height: 60px;
+    }
+
+    .confirmation-screen h2 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+
+    .confirmation-details {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 15px 0;
+        font-size: 0.95rem;
+    }
+
+    .confirmation-details p {
+        margin-bottom: 10px;
+    }
+}
+
+/* ============================================
+   TIPOGRAFÍA RESPONSIVA Y LUJO
+   ============================================ */
+
+@media (max-width: 768px) {
+    html {
+        font-size: 15px; /* Aumentado de 14px */
+    }
+
+    body {
+        line-height: 1.6; /* Interlineado mejorado */
+        letter-spacing: 0.3px;
+    }
+
+    h1,
+    .h1 {
+        font-size: 2.2rem;
+        line-height: 1.3;
+        margin: 24px 0;
+    }
+
+    h2,
+    .h2 {
+        font-size: 1.8rem;
+        line-height: 1.3;
+        margin: 22px 0;
+    }
+
+    h3,
+    .h3 {
+        font-size: 1.4rem;
+        line-height: 1.4;
+        margin: 20px 0;
+    }
+
+    h4,
+    .h4 {
+        font-size: 1.2rem;
+        line-height: 1.5;
+        margin: 16px 0;
+    }
+
+    h5,
+    .h5 {
+        font-size: 1.05rem;
+        line-height: 1.5;
+        margin: 14px 0;
+    }
+
+    p {
+        line-height: 1.7;
+        margin-bottom: 16px;
+    }
+
+    /* Mejorar legibilidad de pequeños textos */
+    small,
+    .small {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+
+    .text-muted {
+        color: #6c757d;
+        line-height: 1.6;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+
+    h1,
+    .h1 {
+        font-size: 1.8rem;
+    }
+
+    h2,
+    .h2 {
+        font-size: 1.5rem;
+    }
+
+    h3,
+    .h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* ============================================
+   VALIDACIÓN Y FEEDBACK VISUAL
+   ============================================ */
+
+@media (max-width: 768px) {
+    .alert {
+        padding: 12px;
+        font-size: 0.9rem;
+        margin: 10px 0;
+        border-radius: 6px;
+    }
+
+    .alert-heading {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    .text-muted {
+        font-size: 0.85rem;
+    }
+
+    .small {
+        font-size: 0.8rem;
+    }
+}
+
+/* ============================================
+   SCROLL Y STICKY ELEMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+    .fixed-top {
+        position: sticky;
+        top: 0;
+    }
+
+    /* Prevenir que el resumen quede pegado permanentemente */
+    .order-summary.sticky-top {
+        position: relative;
+        top: auto;
+    }
+}
+
+/* ============================================
+   ICONOGRAFÍA Y ELEMENTOS PEQUEÑOS
+   ============================================ */
+
+@media (max-width: 768px) {
+    .cart-icon,
+    .cart-badge {
+        font-size: 0.9rem;
+    }
+
+    svg {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .navbar-icon {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* ============================================
+   ESPACIADO GENERAL - AMPLITUD Y LUJO
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Secciones con respiro máximo */
+    section {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+
+    .py-5 {
+        padding-top: 2.5rem !important;
+        padding-bottom: 2.5rem !important;
+    }
+
+    .px-5 {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+
+    .mt-5,
+    .my-5 {
+        margin-top: 2rem !important;
+    }
+
+    .mb-5,
+    .my-5 {
+        margin-bottom: 2rem !important;
+    }
+
+    .gap-5 {
+        gap: 2rem !important;
+    }
+
+    /* Márgenes entre elementos */
+    .card,
+    .product-card {
+        margin-bottom: 20px;
+    }
+
+    /* Contenedores principales con padding */
+    .checkout-section,
+    .cart-section,
+    .shop-section,
+    .product-section {
+        padding: 24px 16px;
+    }
+
+    /* Espacios entre elementos de lista */
+    .list-group-item {
+        padding: 16px;
+        margin-bottom: 12px;
+        border-radius: 8px;
+    }
+
+    /* Breather space en cards */
+    .card-body {
+        padding: 20px 16px;
+    }
+
+    /* Líneas de separación con espacio */
+    hr,
+    .divider {
+        margin: 28px 0;
+    }
+}
+
+/* ============================================
+   PRODUCTO INDIVIDUAL (SINGLE PRODUCT)
+   ============================================ */
+
+@media (max-width: 768px) {
+    .product-main {
+        flex-direction: column;
+    }
+
+    .product-image-container,
+    .product-info-container {
+        width: 100%;
+    }
+
+    .product-title {
+        font-size: 1.3rem;
+    }
+
+    .product-price {
+        font-size: 1.2rem;
+    }
+
+    .quantity-selector,
+    .add-to-cart-btn {
+        width: 100%;
+    }
+
+    .size-selector {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .size-option {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 60px;
+    }
+}
+
+/* ============================================
+   TIENDA (SHOP - GRID DE PRODUCTOS)
+   ============================================ */
+
+@media (max-width: 992px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .product-card {
+        border-radius: 6px;
+    }
+
+    .product-card img {
+        height: 180px;
+    }
+
+    .product-card-title {
+        font-size: 0.95rem;
+    }
+
+    .product-card-price {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .product-card img {
+        height: 250px;
+    }
+}
+
+/* ============================================
+   SWIPER (CAROUSELES)
+   ============================================ */
+
+@media (max-width: 768px) {
+    .swiper {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .swiper-slide {
+        width: 100%;
+    }
+
+    .swiper-pagination {
+        bottom: 10px;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 36px;
+        height: 36px;
+        background: rgba(116, 144, 155, 0.8);
+        border-radius: 50%;
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+        font-size: 16px;
+    }
+}
+
+/* ============================================
+   UTILIDADES ADICIONALES
+   ============================================ */
+
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none !important;
+    }
+
+    .show-mobile {
+        display: block !important;
+    }
+
+    .text-center-mobile {
+        text-align: center;
+    }
+
+    /* Prevenir overflow en elementoscon contenido */
+    .overflow-hidden {
+        overflow: hidden;
+    }
+
+    /* Palabras largas se quiebren correctamente */
+    p,
+    a,
+    span {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+}
+
+/* ============================================
+   ACCESIBILIDAD EN MÓVILES
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Mejorar contraste en móviles */
+    .btn-outline-secondary {
+        font-size: 0.95rem;
+    }
+
+    /* Área táctil mínima de 44x44px recomendada */
+    button,
+    a.btn,
+    input[type="submit"],
+    input[type="button"] {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    /* Focus visible para navegación con teclado */
+    a:focus,
+    button:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: 2px solid #74909B;
+        outline-offset: 2px;
+    }
+}

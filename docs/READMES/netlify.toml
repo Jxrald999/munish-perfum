@@ -1,0 +1,60 @@
+# Configuración de Netlify para Munish Perfum
+
+[build]
+  # Comando de construcción (opcional, no es necesario para sitio estático)
+  command = "echo 'Building static site...'"
+  
+  # Carpeta a publicar (raíz del proyecto)
+  publish = "/"
+
+# Redirecciones (para routing SPA si es necesario)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers de seguridad
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevenir clickjacking
+    X-Frame-Options = "SAMEORIGIN"
+    # XSS Protection
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    # HTTPS redirect
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    # Referrer Policy
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Content Security Policy (relaxado para APIs externas)
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.emailjs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.emailjs.com; frame-src 'none'"
+
+# Cachés
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# HTML (no cachear)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Context de desarrollo (opcional)
+[context.develop]
+  command = "echo 'Desarrollo en proceso...'"
+
+# Context de rama específica (opcional)
+[context.main]
+  command = "echo 'Desplegado en rama main...'"

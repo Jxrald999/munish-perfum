@@ -1,0 +1,532 @@
+/* CHECKOUT.CSS - Estilos elegantes para el proceso de pago */
+
+/* Progress Steps */
+.checkout-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 0;
+    position: relative;
+}
+
+.checkout-steps::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    right: 20%;
+    height: 2px;
+    background: #dee2e6;
+    transform: translateY(-50%);
+    z-index: 0;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #6c757d;
+    transition: all 0.3s ease;
+}
+
+.step span {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.checkout-steps .step {
+    text-align: center;
+    min-width: 120px;
+}
+
+.checkout-steps .step .step-number {
+    margin: 0 auto 6px auto;
+}
+
+.step.active .step-number {
+    background: #74909B;
+    border-color: #74909B;
+    color: white;
+    transform: scale(1.1);
+}
+
+.step.active span {
+    color: #333;
+    font-weight: 600;
+}
+
+.step.completed .step-number {
+    background: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+.step.completed span {
+    color: #28a745;
+}
+
+/* Checkout Form Container */
+.checkout-form-container {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+}
+
+.checkout-form-container h2 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+/* Form Sections */
+.form-section {
+    margin-bottom: 40px;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.section-title {
+    color: #74909B;
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+/* Form Controls */
+.form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 8px;
+}
+
+.form-control,
+.form-select {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #74909B;
+    box-shadow: 0 0 0 0.2rem rgba(116, 144, 155, 0.15);
+}
+
+textarea.form-control {
+    resize: vertical;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid #e9ecef;
+}
+
+.form-actions .btn {
+    padding: 12px 30px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+/* Order Summary */
+.order-summary {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 100px;
+}
+
+.order-summary h4 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+/* Order Items */
+.order-items {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.order-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #f1f3f5;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.order-item-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #f8f9fa;
+}
+
+.order-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.order-item-details {
+    flex: 1;
+}
+
+.order-item-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+}
+
+.order-item-meta {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.order-item-price {
+    text-align: right;
+    font-weight: 600;
+    color: #74909B;
+}
+
+/* Order Totals */
+.order-totals {
+    padding-top: 20px;
+    border-top: 2px solid #e9ecef;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 1rem;
+    color: #495057;
+}
+
+.total-row.total-final {
+    font-size: 1.4rem;
+    color: #333;
+    padding-top: 15px;
+}
+
+/* Security Badge */
+.security-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+/* Payment Screen */
+.payment-screen,
+.confirmation-screen {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.payment-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.payment-header h2 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.payment-header .lead {
+    color: #6c757d;
+}
+
+/* ============================================
+   NUEVA SECCIÓN: PAGO MEJORADO Y LIMPIO
+   ============================================ */
+
+/* Caja de información SINPE */
+.sinpe-info-box {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 24px;
+    border: 2px solid #e9ecef;
+}
+
+.info-item {
+    padding: 12px 0;
+}
+
+.info-item label {
+    display: block;
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 6px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Caja del monto total destacada */
+.total-amount-box {
+    background: linear-gradient(135deg, #74909B 0%, #5a7a88 100%);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(116, 144, 155, 0.3);
+}
+
+.total-amount-box label {
+    color: rgba(255,255,255,0.95);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.total-amount-box h2 {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+/* Sección de WhatsApp destacada */
+.whatsapp-highlight-box {
+    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+    border: 2px solid #81C784;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 24px;
+    box-shadow: 0 3px 10px rgba(129, 199, 132, 0.2);
+}
+
+.whatsapp-highlight-box h5 {
+    color: #2E7D32;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.whatsapp-highlight-box .btn-success {
+    background: #25D366;
+    border-color: #25D366;
+    font-weight: 600;
+    padding: 14px 28px;
+    font-size: 1.05rem;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
+}
+
+.whatsapp-highlight-box .btn-success:hover {
+    background: #20BA5A;
+    border-color: #20BA5A;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+}
+
+/* Confirmation Screen */
+.confirmation-screen {
+    text-align: center;
+    padding: 60px 30px;
+}
+
+.confirmation-icon {
+    margin-bottom: 30px;
+}
+
+.confirmation-icon svg {
+    filter: drop-shadow(0 4px 8px rgba(40, 167, 69, 0.3));
+}
+
+.confirmation-details {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 30px 0;
+}
+
+.confirmation-details p {
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .order-summary {
+        position: static;
+        margin-top: 30px;
+    }
+
+    .checkout-steps::before {
+        left: 10%;
+        right: 10%;
+    }
+    
+    .whatsapp-highlight-box .row {
+        text-align: center;
+    }
+    
+    .whatsapp-highlight-box .btn-success {
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .checkout-form-container {
+        padding: 25px;
+    }
+
+    .form-section {
+        padding: 20px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .checkout-steps {
+        gap: 10px;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .step span {
+        font-size: 0.8rem;
+    }
+    
+    .total-amount-box h2 {
+        font-size: 2rem;
+    }
+    
+    .sinpe-info-box {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .checkout-form-container,
+    .order-summary {
+        padding: 20px;
+    }
+
+    .payment-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .total-amount-box h2 {
+        font-size: 1.8rem;
+    }
+    
+    .whatsapp-highlight-box {
+        padding: 16px;
+    }
+}
+
+/* Loading State */
+.btn.loading {
+    pointer-events: none;
+    opacity: 0.6;
+    position: relative;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spinner 0.6s linear infinite;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Success Animation */
+@keyframes checkmark {
+    0% {
+        stroke-dashoffset: 100;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.confirmation-icon svg path {
+    animation: checkmark 0.5s ease-out 0.3s both;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+}

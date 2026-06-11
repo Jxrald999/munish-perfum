@@ -1,0 +1,106 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">Productos</h4>
+  <a href="/products/create" class="btn btn-dark btn-sm"><i class="bi bi-plus-lg"></i> Nuevo</a>
+</div>
+
+<form method="GET" class="row g-2 mb-3">
+  <div class="col-md-4">
+    <input type="text" name="search" class="form-control form-control-sm" placeholder="Buscar nombre o marca..." value="<%= search %>">
+  </div>
+  <div class="col-md-2">
+    <select name="genero" class="form-select form-select-sm">
+      <option value="">Todos los géneros</option>
+      <option value="Hombre" <%= genero === 'Hombre' ? 'selected' : '' %>>Hombre</option>
+      <option value="Mujer" <%= genero === 'Mujer' ? 'selected' : '' %>>Mujer</option>
+      <option value="Unisex" <%= genero === 'Unisex' ? 'selected' : '' %>>Unisex</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <select name="stock" class="form-select form-select-sm">
+      <option value="">Todos</option>
+      <option value="low" <%= stockFilter === 'low' ? 'selected' : '' %>>Stock bajo</option>
+      <option value="out" <%= stockFilter === 'out' ? 'selected' : '' %>>Agotados</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-outline-dark btn-sm w-100">Filtrar</button>
+  </div>
+</form>
+
+<form method="POST" action="/products/bulk" id="bulkForm">
+<div class="card border-0 shadow-sm">
+  <div class="table-responsive">
+    <table class="table table-hover mb-0">
+      <thead>
+        <tr>
+          <th width="30"><input type="checkbox" id="selectAll"></th>
+          <th></th>
+          <th>Producto</th>
+          <th>Marca</th>
+          <th>Género</th>
+          <th>Precio 50ml</th>
+          <th>Stock</th>
+          <th>Dest.</th>
+          <th>Activo</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (products.length === 0) { %>
+          <tr><td colspan="10" class="text-center text-muted py-4">No hay productos</td></tr>
+        <% } %>
+        <% products.forEach(p => { %>
+          <tr>
+            <td><input type="checkbox" name="ids" value="<%= p.id %>" class="productCheck"></td>
+            <td><img src="<%= getProductImage(p) %>" class="product-img"></td>
+            <td><a href="/products/<%= p.id %>/edit" class="text-decoration-none fw-medium"><%= p.title %></a></td>
+            <td class="text-muted"><%= p.brand || '-' %></td>
+            <td><span class="badge bg-light text-dark"><%= p.genero || '-' %></span></td>
+            <td>₡<%= Number(p.price50ml || 0).toLocaleString('es-CR') %></td>
+            <td>
+              <span class="badge <%= p.stock <= 0 ? 'bg-danger' : p.stock <= 5 ? 'bg-warning' : 'bg-success' %>">
+                <%= p.stock %>
+              </span>
+            </td>
+            <td><%= p.is_featured ? '⭐' : '-' %></td>
+            <td><%= p.is_active ? '✅' : '❌' %></td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-link dropdown-toggle" data-bs-toggle="dropdown"></button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="/products/<%= p.id %>/edit">✏️ Editar</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item text-danger" href="#" onclick="if(confirm('¿Eliminar?')) fetch('/products/<%= p.id %>/delete',{method:'POST'}).then(()=>location.reload())">🗑️ Eliminar</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="mt-2 d-flex gap-2 align-items-center">
+  <span class="text-muted small" id="selectedCount">0 seleccionados</span>
+  <select name="action" class="form-select form-select-sm" style="width:auto;">
+    <option value="activate">Activar</option>
+    <option value="deactivate">Desactivar</option>
+    <option value="feature">Destacar</option>
+    <option value="delete">Eliminar</option>
+  </select>
+  <button type="submit" class="btn btn-outline-dark btn-sm" onclick="return confirm('¿Aplicar a seleccionados?')">Aplicar</button>
+  <a href="/export/products" target="_blank" class="btn btn-outline-secondary btn-sm ms-auto"><i class="bi bi-download"></i> Exportar JSON</a>
+</div>
+</form>
+
+<script>
+document.getElementById('selectAll')?.addEventListener('change', function() {
+  document.querySelectorAll('.productCheck').forEach(c => c.checked = this.checked);
+  updateCount();
+});
+document.querySelectorAll('.productCheck').forEach(c => c.addEventListener('change', updateCount));
+function updateCount() {
+  document.getElementById('selectedCount').textContent = document.querySelectorAll('.productCheck:checked').length + ' seleccionados';
+}
+</script>

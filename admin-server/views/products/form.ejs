@@ -1,0 +1,131 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0"><%= product?.id ? 'Editar Producto' : 'Nuevo Producto' %></h4>
+  <a href="/products" class="btn btn-outline-secondary btn-sm">← Volver</a>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="card-body">
+    <form method="POST" enctype="multipart/form-data">
+      <% if (product?.id) { %><input type="hidden" name="_method" value="PUT"><% } %>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Nombre del Producto *</label>
+          <input type="text" name="title" class="form-control <%= errors?.title ? 'is-invalid' : '' %>" value="<%= product?.title || '' %>" required>
+          <% if (errors?.title) { %><div class="invalid-feedback"><%= errors.title %></div><% } %>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Marca</label>
+          <input type="text" name="brand" class="form-control" value="<%= product?.brand || '' %>" placeholder="Ej: Nautica">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Género</label>
+          <select name="genero" class="form-select">
+            <option value="">Seleccionar</option>
+            <option value="Hombre" <%= product?.genero === 'Hombre' ? 'selected' : '' %>>Hombre</option>
+            <option value="Mujer" <%= product?.genero === 'Mujer' ? 'selected' : '' %>>Mujer</option>
+            <option value="Unisex" <%= product?.genero === 'Unisex' ? 'selected' : '' %>>Unisex</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Familia Olfativa</label>
+          <select name="familia_olfativa" class="form-select">
+            <option value="">Seleccionar</option>
+            <% ['Floral Frutal','Oriental Amaderado','Acuático Aromático','Aromático Especiado','Floral Frutal Gourmand','Oriental Frutal','Oriental Gourmand','Oriental Floral'].forEach(f => { %>
+              <option value="<%= f %>" <%= product?.familia_olfativa === f ? 'selected' : '' %>><%= f %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Duración</label>
+          <input type="text" name="duracion" class="form-control" value="<%= product?.duracion || '' %>" placeholder="Ej: 6-8 horas">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Ocasión</label>
+          <input type="text" name="ocasion" class="form-control" value="<%= product?.ocasion || '' %>" placeholder="Casual, Formal, Noche">
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Descripción</label>
+          <textarea name="descripcion" class="form-control" rows="4"><%= product?.descripcion || '' %></textarea>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Notas de Salida</label>
+          <input type="text" name="notas_salida" class="form-control" value="<%= product?.notas_salida || '' %>" placeholder="Bergamota, Limón">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Notas de Corazón</label>
+          <input type="text" name="notas_corazon" class="form-control" value="<%= product?.notas_corazon || '' %>" placeholder="Jazmín, Rosa">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Notas de Fondo</label>
+          <input type="text" name="notas_fondo" class="form-control" value="<%= product?.notas_fondo || '' %>" placeholder="Ámbar, Vainilla">
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Precio Botella 50ml (₡)</label>
+          <input type="number" name="price50ml" class="form-control" value="<%= product?.price50ml || '' %>" min="0">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Precio Botella 100ml (₡)</label>
+          <input type="number" name="price100ml" class="form-control" value="<%= product?.price100ml || '' %>" min="0">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Stock</label>
+          <input type="number" name="stock" class="form-control" value="<%= product?.stock || 0 %>" min="0" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Estación</label>
+          <input type="text" name="estacion" class="form-control" value="<%= product?.estacion || '' %>" placeholder="Verano, Invierno">
+        </div>
+
+        <div class="col-12"><hr><h6>Precios Decant</h6></div>
+        <div class="col-md-3">
+          <label class="form-label">Decant 2ml (₡)</label>
+          <input type="number" name="decant_2ml" class="form-control" value="<%= product?.decant_2ml || 1200 %>" min="0">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Decant 3ml (₡)</label>
+          <input type="number" name="decant_3ml" class="form-control" value="<%= product?.decant_3ml || 1600 %>" min="0">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Decant 5ml (₡)</label>
+          <input type="number" name="decant_5ml" class="form-control" value="<%= product?.decant_5ml || 2100 %>" min="0">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Decant 10ml (₡)</label>
+          <input type="number" name="decant_10ml" class="form-control" value="<%= product?.decant_10ml || 4000 %>" min="0">
+        </div>
+
+        <div class="col-12"><hr></div>
+        <div class="col-md-6">
+          <label class="form-label">Imagen Principal</label>
+          <input type="file" name="image" class="form-control" accept="image/*">
+          <% if (product?.image) { %>
+            <div class="mt-2"><img src="<%= getProductImage(product) %>" style="max-height:80px;border-radius:6px;"></div>
+          <% } %>
+        </div>
+        <div class="col-md-3 d-flex align-items-center">
+          <div class="form-check">
+            <input type="checkbox" name="is_active" class="form-check-input" value="1" <%= product?.is_active !== 0 ? 'checked' : '' %> id="activeCheck">
+            <label class="form-check-label" for="activeCheck">Producto Activo</label>
+          </div>
+        </div>
+        <div class="col-md-3 d-flex align-items-center">
+          <div class="form-check">
+            <input type="checkbox" name="is_featured" class="form-check-input" value="1" <%= product?.is_featured ? 'checked' : '' %> id="featuredCheck">
+            <label class="form-check-label" for="featuredCheck">Destacado</label>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <hr>
+          <button type="submit" class="btn btn-dark"><%= product?.id ? 'Guardar Cambios' : 'Crear Producto' %></button>
+          <a href="/products" class="btn btn-outline-secondary">Cancelar</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

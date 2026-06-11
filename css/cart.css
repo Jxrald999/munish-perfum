@@ -1,0 +1,344 @@
+/* CART.CSS - Estilos elegantes para el carrito de compras */
+
+/* Badge del carrito */
+.cart-badge {
+    display: none;
+    background: #fa253b;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 5px;
+    vertical-align: super;
+    line-height: 1;
+}
+
+.cart-icon-container.has-items {
+    position: relative;
+}
+
+/* Notificación de producto agregado */
+.cart-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border-left: 4px solid #28a745;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    padding: 15px 20px;
+    border-radius: 8px;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    max-width: 350px;
+}
+
+.cart-notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.cart-notification .notification-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #333;
+}
+
+.cart-notification svg {
+    flex-shrink: 0;
+    color: #28a745;
+}
+
+/* Sección del carrito */
+.cart-section {
+    min-height: 60vh;
+}
+
+/* Container de items */
+.cart-items-container {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+/* Item individual del carrito */
+.cart-item {
+    display: grid;
+    grid-template-columns: 100px 1fr auto auto;
+    gap: 20px;
+    padding: 20px;
+    border-bottom: 1px solid #e9ecef;
+    align-items: center;
+    transition: background 0.2s ease;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item:hover {
+    background: #f8f9fa;
+}
+
+.cart-item-image {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #f8f8f8;
+}
+
+.cart-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cart-item-details h5 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 500;
+}
+
+.cart-item-brand {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+
+.cart-item-size {
+    font-size: 0.9rem;
+    color: #74909B;
+    margin-bottom: 5px;
+}
+
+.cart-item-price {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #74909B;
+    margin: 0;
+}
+
+.cart-item-quantity label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.cart-quantity-input {
+    width: 80px;
+    padding: 8px 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-align: center;
+    transition: border-color 0.2s ease;
+}
+
+.cart-quantity-input:focus {
+    outline: none;
+    border-color: #74909B;
+}
+
+.cart-item-quantity small {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.75rem;
+}
+
+.cart-item-total {
+    text-align: right;
+}
+
+.cart-item-total p {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* Carrito vacío */
+.empty-cart {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.empty-cart svg {
+    color: #dee2e6;
+    margin-bottom: 20px;
+}
+
+.empty-cart h3 {
+    color: #495057;
+    margin-bottom: 15px;
+}
+
+.empty-cart p {
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+/* Resumen del carrito */
+.cart-summary {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 100px;
+}
+
+.cart-summary h4 {
+    color: #333;
+    font-weight: 600;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 15px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    font-size: 1rem;
+    color: #495057;
+}
+
+.summary-row.summary-total {
+    font-size: 1.3rem;
+    color: #333;
+    padding-top: 20px;
+}
+
+.cart-summary hr {
+    margin: 15px 0;
+    border-top: 2px solid #e9ecef;
+}
+
+/* Trust section */
+.trust-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.trust-section svg {
+    opacity: 0.8;
+}
+
+.trust-section h5 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .cart-summary {
+        position: static;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cart-item {
+        grid-template-columns: 80px 1fr;
+        gap: 15px;
+    }
+    
+    .cart-item-quantity,
+    .cart-item-total {
+        grid-column: 2;
+        margin-top: 10px;
+    }
+    
+    .cart-item-total {
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .cart-item-image {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .cart-notification {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-items-container,
+    .cart-summary {
+        padding: 15px;
+    }
+    
+    .cart-item {
+        padding: 15px 10px;
+    }
+    
+    .cart-item-details h5 {
+        font-size: 0.95rem;
+    }
+    
+    .cart-quantity-input {
+        width: 60px;
+        padding: 6px 8px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Animaciones */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.cart-item {
+    animation: slideInRight 0.3s ease-out;
+}
+
+/* Botones mejorados */
+.btn-remove-item:hover {
+    background: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+.cart-summary .btn-dark {
+    background: #333;
+    border: none;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.cart-summary .btn-dark:hover {
+    background: #74909B;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.btn-clear-cart {
+    border: 2px solid #6c757d;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.btn-clear-cart:hover {
+    background: #6c757d;
+    color: white;
+}
