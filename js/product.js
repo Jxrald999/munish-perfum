@@ -423,15 +423,7 @@ window.addEventListener('load', function(){
   try{ if(window.DB && typeof window.DB.init==='function') window.DB.init(); }catch(e){} 
   try{ if(typeof window.updateCartBadge==='function') window.updateCartBadge(); }catch(e){} 
 
-  // SOLO ejecutar el renderizado de product.js si NO estamos en la tienda
-  const isShopPage = window.location.pathname.includes('shop.html');
-  if (!isShopPage) {
-    // Show loading state until API data arrives
-    const container = document.querySelector('.product-info') || document.getElementById('product-detail');
-    if (container && !window.PRODUCTS_LOADED) {
-      container.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-secondary mb-3" role="status" style="width:3rem;height:3rem;"><span class="visually-hidden">Cargando...</span></div><p class="text-muted">Cargando producto...</p></div>';
-    }
-  }
+
 
   try{ window.bindShopFilters && window.bindShopFilters(); }catch(e){} 
   // Try to render now (will work if API already responded)
