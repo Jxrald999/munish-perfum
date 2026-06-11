@@ -1,0 +1,17 @@
+# robots.txt para Munish Perfum
+# Permite que Google y otros motores indexen el sitio
+
+User-agent: *
+Allow: /
+
+# Disallow admin/backend directories (si existen)
+Disallow: /fraganze-admin/
+Disallow: /READMES/
+Disallow: *.ps1$
+Disallow: *.md$
+
+# Sitemap (actualizar cuando tengas dominio personalizado)
+Sitemap: https://tomatitomkk.github.io/munish-perfum/sitemap.xml
+
+# Crawl-delay (opcional, previene sobrecarga del servidor)
+Crawl-delay: 10

@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title data-i18n="shop-title-tag">Tienda - Fraganze Perfumes</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explora nuestra colección completa de perfumes de lujo">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/mobile-responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .filter-section {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .filter-group {
+            margin-bottom: 20px;
+        }
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .price-range {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .price-range input {
+            width: 100px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .breadcrumb {
+            background: transparent;
+            padding: 20px 0;
+        }
+        .sort-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .sort-section select {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+        }
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #fa253b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 2;
+        }
+        .product-badge.new {
+            background: #5595c6;
+        }
+        .product-badge.sale {
+            background: #fa253b;
+        }
+        /* Product Card Link Styles */
+        a[href*="single-product.html?id"] {
+            text-decoration: none !important;
+            color: inherit !important;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        a[href*="single-product.html?id"]:hover .product-card {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12) !important;
+        }
+        .product-card {
+            transition: all 0.3s ease;
+        }
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+        }
+        /* Ensure offcanvas menu links are visible on light backgrounds in mobile */
+        .offcanvas .navbar-brand {
+            color: #000000 !important;
+        }
+        .offcanvas .nav-link {
+            color: #000000 !important;
+            font-weight: 500 !important;
+        }
+        /* Make filter collapse button visible and tidy on mobile */
+        .filter-collapse-toggle { display: none; }
+        @media (max-width: 991px) {
+            .filter-collapse-toggle { display: block; }
+            .filter-section.collapse { display: none; }
+            .filter-section.collapse.show { display: block; }
+        }
+        /* Ensure product cards have stable height and spacing on mobile */
+        .product-card { min-height: 320px; }
+    </style>
+</head>
+<body class="bg-body">
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol xmlns="http://www.w3.org/2000/svg" id="navbar-icon" viewBox="0 0 16 16">
+        <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5z" />
+      </symbol>
+    </svg>
+    <header id="header" class="site-header" style="background-color: #0066FF; box-shadow: 0 4px 12px rgba(0, 102, 255, 0.15);">
+        <nav id="header-nav" class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand brand-text" href="index.html" style="color: #FFFFFF !important; font-weight: 700;">
+                    <span class="brand-name">Munish Perfum</span>
+                </a>
+                <div class="d-inline-flex align-items-center gap-2 ms-3">
+                    <button class="lang-toggle" data-i18n="lang-en" aria-label="Idioma">EN</button>
+                    <button class="theme-toggle" aria-label="Modo oscuro">🌙</button>
+                    <a href="cart.html" onclick="try{updateCartBadge();}catch(e){}" class="cart-link d-inline-flex align-items-center" style="color: #FFFFFF !important;" aria-label="Carrito">
+                        <span class="cart-icon me-2">🛒</span>
+                        <span class="cart-badge">0</span>
+                    </a>
+                </div>
+                <button class="navbar-toggler d-flex d-lg-none order-3 p-2 border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar">
+                    <svg class="navbar-icon" width="50" height="50" style="fill: #FFFFFF;">
+                        <use xlink:href="#navbar-icon"></use>
+                    </svg>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar">
+                    <div class="offcanvas-header px-4 pb-0">
+                        <a class="navbar-brand brand-text" href="index.html" style="color: #000000 !important; font-weight: 700;">
+                            <span class="brand-name">Munish Perfum</span>
+                        </a>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 gap-5 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link p-0" href="index.html" style="color: #000000 !important; font-weight: 500;" data-i18n="nav-inicio">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-0" href="index.html#overview" style="color: #000000 !important; font-weight: 500;" data-i18n="nav-nosotros">Nosotros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-0 active" href="shop.html" style="color: #000000 !important; font-weight: 500;" data-i18n="nav-tienda">Tienda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-0" href="index.html#faqs" style="color: #000000 !important; font-weight: 500;" data-i18n="nav-preguntas">Preguntas</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" data-i18n="breadcrumb-home">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page" data-i18n="breadcrumb-shop">Tienda</li>
+            </ol>
+        </nav>
+    </div>
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 mb-4">
+                    <button class="btn btn-outline-secondary filter-collapse-toggle mb-3 d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse" data-i18n="shop-filters-btn">
+                        Filtros
+                    </button>
+                    <div id="filterCollapse" class="filter-section collapse show d-lg-block">
+                        <h5 class="mb-4" data-i18n="shop-filter-title">Filtrar Productos</h5>
+                        <div class="filter-group">
+                            <label for="search-input" data-i18n="shop-search">Buscar</label>
+                            <input type="search" class="form-control" id="search-input" placeholder="Nombre o descripción..." data-i18n="shop-search-placeholder" autocomplete="off">
+                        </div>
+                        <div class="filter-group">
+                            <label data-i18n="shop-gender">Género</label>
+                            <div class="form-check">
+                                <input class="form-check-input filter-gender" type="checkbox" id="gen1" value="Hombre">
+                                <label class="form-check-label" for="gen1" data-i18n="shop-gender-man">Hombre</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-gender" type="checkbox" id="gen2" value="Mujer">
+                                <label class="form-check-label" for="gen2" data-i18n="shop-gender-woman">Mujer</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-gender" type="checkbox" id="gen3" value="Unisex">
+                                <label class="form-check-label" for="gen3" data-i18n="shop-gender-unisex">Unisex</label>
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <label data-i18n="shop-price-range">Rango de Precio (₡)</label>
+                            <div class="price-range">
+                                <input type="number" id="price-min" class="form-control" placeholder="Min" data-i18n="shop-price-min" value="0" min="0" step="100">
+                                <span>-</span>
+                                <input type="number" id="price-max" class="form-control" placeholder="Max" data-i18n="shop-price-max" value="999999" min="0" step="100">
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <label data-i18n="shop-family">Familia Olfativa</label>
+                            <div class="form-check">
+                                <input class="form-check-input filter-family" type="checkbox" id="fam1" value="Floral Frutal">
+                                <label class="form-check-label" for="fam1" data-i18n="shop-family-floral-frutal">Floral Frutal</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-family" type="checkbox" id="fam2" value="Oriental Amaderado">
+                                <label class="form-check-label" for="fam2" data-i18n="shop-family-oriental-amaderado">Oriental Amaderado</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-family" type="checkbox" id="fam3" value="Acuático Aromático">
+                                <label class="form-check-label" for="fam3" data-i18n="shop-family-acuatico-aromatico">Acuático Aromático</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-family" type="checkbox" id="fam4" value="Aromático Especiado">
+                                <label class="form-check-label" for="fam4" data-i18n="shop-family-aromatico-especiado">Aromático Especiado</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-family" type="checkbox" id="fam5" value="Floral Frutal Gourmand">
+                                <label class="form-check-label" for="fam5" data-i18n="shop-family-floral-frutal-gourmand">Floral Frutal Gourmand</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-family" type="checkbox" id="fam6" value="Oriental Frutal">
+                                <label class="form-check-label" for="fam6" data-i18n="shop-family-oriental-frutal">Oriental Frutal</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-family" type="checkbox" id="fam7" value="Oriental Gourmand">
+                                <label class="form-check-label" for="fam7" data-i18n="shop-family-oriental-gourmand">Oriental Gourmand</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-family" type="checkbox" id="fam8" value="Oriental Floral">
+                                <label class="form-check-label" for="fam8" data-i18n="shop-family-oriental-floral">Oriental Floral</label>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-dark w-100 mt-3" id="btn-apply-filters" data-i18n="shop-apply-filters">Aplicar Filtros</button>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="sort-section">
+                        <p class="mb-0 shop-result-count" data-i18n="shop-showing">Mostrando <strong>0</strong> productos</p>
+                        <select id="sort-select" class="form-select" style="width: auto;">
+                            <option value="popularidad" data-i18n="shop-sort-popularity">Ordenar por popularidad</option>
+                            <option value="precio-ascendente" data-i18n="shop-sort-price-asc">Ordenar por precio: bajo a alto</option>
+                            <option value="precio-descendente" data-i18n="shop-sort-price-desc">Ordenar por precio: alto a bajo</option>
+                            <option value="alfabetico" data-i18n="shop-sort-alpha">Ordenar alfabéticamente</option>
+                        </select>
+                    </div>
+                    <div class="row product-grid-dynamic" id="product-grid-main">
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="py-5 bg-linear">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-uppercase mb-3" data-i18n="footer-brand">Munish Perfum</h5>
+                    <p data-i18n="footer-desc">Tu destino para fragancias exclusivas de lujo. Calidad premium garantizada.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-uppercase mb-3" data-i18n="footer-links">Enlaces</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" data-i18n="footer-link-home">Inicio</a></li>
+                        <li><a href="shop.html" data-i18n="footer-link-shop">Tienda</a></li>
+                        <li><a href="index.html#testimonials" data-i18n="footer-link-testimonials">Testimonios</a></li>
+                        <li><a href="index.html#faqs" data-i18n="footer-link-faqs">Preguntas</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-uppercase mb-3" data-i18n="footer-contact">Contacto</h5>
+                    <p data-i18n="footer-contact-info">Email: munishperfum@gmail.com<br>Tel: +506 8445 3904</p>
+                </div>
+            </div>
+            <div class="text-center pt-4">
+                <p class="mb-0" data-i18n="footer-text">© 2026 Munish Perfume. Diseñado con ❤️ para amantes de fragancias exclusivas.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- SCRIPTS OPTIMIZADOS PARA SHOP.HTML -->
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/api-products.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/i18n.js"></script>
+    <!-- REMOVIDO: product.js (causaba conflicto con shop.js) -->
+    <script src="js/shop.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

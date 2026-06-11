@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="404-title-tag">404 - Página No Encontrada | Munish Perfum</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .error-container {
+            text-align: center;
+            color: white;
+            padding: 40px;
+        }
+        .error-code {
+            font-size: 150px;
+            font-weight: bold;
+            line-height: 1;
+            margin-bottom: 20px;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .error-message {
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .btn-home {
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            color: #764ba2;
+        }
+        .perfume-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: spin 10s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .suggestions {
+            margin-top: 40px;
+        }
+        .suggestions a {
+            color: white;
+            text-decoration: underline;
+            margin: 0 15px;
+            font-size: 16px;
+        }
+        .suggestions a:hover {
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <div style="position:absolute;top:20px;right:20px;display:flex;gap:10px;">
+        <button class="lang-toggle" data-i18n="lang-en" style="background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.4);color:#fff;">EN</button>
+        <button class="theme-toggle" style="background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.4);color:#fff;">🌙</button>
+    </div>
+    <script src="js/theme.js"></script>
+    <script src="js/i18n.js"></script>
+    <div class="error-container">
+        <div class="perfume-icon">🌺</div>
+        <div class="error-code">404</div>
+        <div class="error-message" data-i18n="404-title">
+            ¡Ups! Esta fragancia no existe en nuestro catálogo
+        </div>
+        <p data-i18n="404-desc" style="font-size: 18px; margin-bottom: 30px; opacity: 0.9;">
+            Parece que la página que buscas se ha evaporado como una fragancia en el aire...
+        </p>
+        <a href="index.html" class="btn-home" data-i18n="404-btn">
+            🏠 Volver al Inicio
+        </a>
+        
+        <div class="suggestions">
+            <p data-i18n="404-suggestions" style="margin-bottom: 15px;">Tal vez estés buscando:</p>
+            <a href="shop.html" data-i18n="404-link-shop">🛍️ Tienda</a>
+            <a href="cart.html" data-i18n="404-link-cart">🛒 Carrito</a>
+            <a href="tracking.html" data-i18n="404-link-tracking">📦 Seguimiento</a>
+        </div>
+    </div>
+    
+    <script>
+        // Redirect a la página de inicio después de 10 segundos
+        setTimeout(function() {
+            window.location.href = 'index.html';
+        }, 10000);
+        
+        // Log del error para debugging
+        console.error('404 Error - Página no encontrada:', window.location.href);
+    </script>
+</body>
+</html>

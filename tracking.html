@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title data-i18n="tracking-title-tag">Rastrear Pedido - Fraganze</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rastrea tu pedido de Fraganze">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .tracking-hero {
+            background: linear-gradient(135deg, #74909B 0%, #5a7a88 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 50px;
+        }
+        .tracking-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+        .search-card {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            border: none;
+            margin-top: -40px;
+            background: white;
+        }
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            padding-bottom: 40px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: -40px;
+            width: 3px;
+            background: linear-gradient(to bottom, #74909B, #dee2e6);
+        }
+        .timeline-item:last-child::before {
+            background: linear-gradient(to bottom, #74909B 0%, transparent 100%);
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid #dee2e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        .timeline-dot.active {
+            background: #74909B;
+            border-color: #74909B;
+            box-shadow: 0 0 0 8px rgba(116, 144, 155, 0.2);
+            transform: scale(1.1);
+        }
+        .timeline-dot.active svg {
+            fill: white;
+        }
+        .timeline-content {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .timeline-item:hover .timeline-content {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        .status-badge {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .order-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .tracking-info-box {
+            background: linear-gradient(135deg, #E4EDF1 0%, #d5e5ed 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .search-input {
+            border: 2px solid #e9ecef;
+            border-radius: 10px 0 0 10px;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+        }
+        .search-input:focus {
+            border-color: #74909B;
+            box-shadow: none;
+        }
+        .search-btn {
+            border-radius: 0 10px 10px 0;
+            padding: 15px 40px;
+            font-weight: 600;
+            background: #74909B;
+            border: none;
+        }
+        .search-btn:hover {
+            background: #5a7a88;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(116, 144, 155, 0.3);
+        }
+        @media (max-width: 768px) {
+            .tracking-hero {
+                padding: 40px 0;
+            }
+            .timeline-item {
+                padding-left: 50px;
+            }
+            .timeline-dot {
+                width: 35px;
+                height: 35px;
+                left: -3px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-body">
+    <!-- Header -->
+    <header id="header" class="site-header text-black bg-primary">
+        <nav id="header-nav" class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand brand-text" href="index.html">
+                    <span class="brand-name">Munish Perfum</span>
+                </a>
+                <button class="navbar-toggler d-flex d-lg-none order-3 p-2 border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar">
+                    <svg class="navbar-icon" width="50" height="50">
+                        <use xlink:href="#navbar-icon"></use>
+                    </svg>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar">
+                    <div class="offcanvas-header px-4 pb-0">
+                        <a class="navbar-brand brand-text" href="index.html">
+                            <span class="brand-name">Munish Perfum</span>
+                        </a>
+                        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 gap-5 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link p-0" href="index.html" data-i18n="nav-inicio">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-0" href="shop.html" data-i18n="nav-tienda">Tienda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-0" href="cart.html" data-i18n="nav-carrito">Carrito</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-0 active" href="tracking.html" data-i18n="nav-tracking">Rastrear</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="tracking-hero">
+        <div class="container text-center">
+            <h1 class="display-4 mb-3" data-i18n="tracking-hero-title">Rastrea tu Pedido</h1>
+            <p class="lead" data-i18n="tracking-hero-desc">Ingresa tu número de pedido o correo electrónico</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="tracking-container">
+        <!-- Search Card -->
+        <div class="card search-card">
+            <div class="card-body p-4">
+                <form id="tracking-form">
+                    <div class="input-group input-group-lg">
+                        <input type="text" class="form-control search-input" id="order-input" 
+                               placeholder="FRG-12345678 o tu@email.com" data-i18n="tracking-input-placeholder" required>
+                            <button class="btn btn-dark search-btn" type="submit" data-i18n="tracking-search-btn">
+                            <svg width="20" height="20" fill="currentColor" class="me-2" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                            Buscar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading-state" class="text-center py-5" style="display: none;">
+            <div class="spinner-border text-secondary" role="status" style="width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Buscando...</span>
+            </div>
+            <p class="mt-3 text-muted" data-i18n="tracking-loading">Buscando tu pedido...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state" class="alert alert-warning mt-4" style="display: none;">
+            <h5 data-i18n="tracking-error-title">❌ Pedido no encontrado</h5>
+            <p class="mb-0" data-i18n="tracking-error-desc">Verifica que el número de pedido o correo sean correctos.</p>
+        </div>
+
+        <!-- Tracking Result -->
+        <div id="tracking-result" style="display: none;">
+            <!-- Order Info Card -->
+            <div class="order-card mt-4">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h3 class="mb-2" data-i18n="tracking-order-label">Pedido: <span id="order-number" class="text-secondary"></span></h3>
+                        <p class="text-muted mb-2">
+                            <svg width="16" height="16" fill="currentColor" class="me-1" viewBox="0 0 16 16">
+                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                            </svg>
+                            <span data-i18n="tracking-order-date">Realizado el:</span> <span id="order-date"></span>
+                        </p>
+                        <p class="mb-0">
+                            <strong data-i18n="tracking-order-total">Total:</strong> <span id="order-total" class="text-primary fs-5"></span>
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                        <span id="order-status" class="status-badge"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tracking Info (if available) -->
+            <div id="tracking-info" class="tracking-info-box" style="display: none;">
+                <h5 class="mb-3" data-i18n="tracking-shipping-title">
+                    <svg width="20" height="20" fill="currentColor" class="me-2" viewBox="0 0 16 16">
+                        <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                    </svg>
+                    Información de Envío
+                </h5>
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <strong data-i18n="tracking-company">Empresa:</strong><br>
+                        <span id="tracking-company"></span>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <strong data-i18n="tracking-guide">Número de Guía:</strong><br>
+                        <span id="tracking-number" class="text-secondary fw-bold"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <a id="tracking-url" href="#" target="_blank" class="btn btn-sm btn-dark w-100" data-i18n="tracking-view-courier">
+                            Ver en courier
+                            <svg width="12" height="12" fill="currentColor" class="ms-1" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                                <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="order-card">
+                <h5 class="mb-4" data-i18n="tracking-history-title">Historial del Pedido</h5>
+                <div class="timeline" id="timeline">
+                    <!-- Timeline items will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-linear">
+        <div class="container">
+            <div class="text-center">
+                <p class="mb-0" data-i18n="footer-text">© 2026 Munish Perfum. Diseñado con ❤️ para amantes de fragancias exclusivas.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/tracking.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/i18n.js"></script>
+</body>
+</html>

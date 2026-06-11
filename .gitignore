@@ -1,0 +1,142 @@
+# ============================================
+# GITIGNORE OPTIMIZADO PARA GITHUB PAGES
+# ============================================
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# IDE & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Environment Variables (CRÍTICO - NUNCA SUBIR)
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+config-local.js
+secrets.json
+.firebase-config.js
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Build & Logs
+dist/
+build/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+__tests__/
+test/
+*.test.js
+*.spec.js
+
+# Backups (NO SUBIR A PRODUCCIÓN)
+*.backup
+*_old.*
+*_backup.*
+*.bak
+*~
+
+# Temporary
+*.tmp
+*.temp
+.cache/
+tmp/
+temp/
+
+# Laravel Admin (SI EXISTE)
+fraganze-admin/vendor/
+fraganze-admin/.env
+fraganze-admin/storage/logs/*
+fraganze-admin/bootstrap/cache/*
+fraganze-admin/node_modules/
+
+# Node.js Admin Server
+admin-server/node_modules/
+admin-server/data/
+admin-server/uploads/
+admin-server/.env
+!fraganze-admin/storage/.gitkeep
+!fraganze-admin/bootstrap/cache/.gitkeep
+
+# Database (NUNCA SUBIR DATOS REALES)
+*.db
+*.sqlite
+*.sqlite3
+database.sqlite
+supabase_*.sql
+*.sql.gz
+*.dump
+
+# Large Media Files (OPTIMIZAR PESO DEL REPO)
+# Usar servicios externos para videos/archivos grandes
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.wmv
+*.flv
+*.webm
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.iso
+
+# Imágenes grandes sin comprimir (> 500KB)
+# Excepción: Imágenes de productos YA optimizadas en /images/
+# *.png  # NO descomentar esto, necesitas las imágenes de productos
+# *.jpg  # NO descomentar esto, necesitas las imágenes de productos
+
+# Documentation Files (OPCIONAL - Mantener solo si son útiles)
+# Si no quieres que aparezcan en el sitio público, descomentálos:
+# README.md
+# SISTEMA_*.md
+# TIENDA_*.md
+# GitHub Pages build artifacts
+.jekyll-cache/
+_site/
+Gemfile.lock
+
+# ============================================
+# NOTAS IMPORTANTES PARA GITHUB PAGES:
+# ============================================
+# 1. SÍ SUBIR: HTML, CSS, JS, imágenes de productos
+# 2. NO SUBIR: Credenciales, archivos .env, bases de datos
+# 3. OPTIMIZAR: Comprimir imágenes antes de subir (< 200KB)
+# 4. GitHub Pages tiene límite de 1GB por repositorio
+# 5. GitHub Pages es SOLO para sitios estáticos (sin backend PHP/Laravel)

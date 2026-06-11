@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title data-i18n="product-title-tag">Producto - Fraganze Perfumes</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detalles del producto">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/mobile-responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .product-images {
+            position: static;
+        }
+        @media (min-width: 992px) {
+            .product-images {
+                position: sticky;
+                top: 100px;
+            }
+        }
+        .main-image {
+            border: 2px solid #E4EDF1;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .main-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .thumbnail-images {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            border: 2px solid #E4EDF1;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .thumbnail:hover,
+        .thumbnail.active {
+            border-color: #74909B;
+            transform: scale(1.05);
+        }
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 20px;
+        }
+        .product-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .product-price {
+            font-size: 2rem;
+            color: #74909B;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .product-price del {
+            color: #999;
+            font-size: 1.5rem;
+            margin-left: 10px;
+        }
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .stars {
+            color: #FFD700;
+            font-size: 1.2rem;
+        }
+        .stock-status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .stock-status.in-stock {
+            background: #d4edda;
+            color: #155724;
+        }
+        .stock-status.low-stock {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .stock-status.out-stock {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        .quantity-control {
+            display: flex;
+            border: 2px solid #E4EDF1;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .quantity-control button {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: #f8f8f8;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background 0.3s;
+        }
+        .quantity-control button:hover {
+            background: #E4EDF1;
+        }
+        .quantity-control input {
+            width: 60px;
+            height: 40px;
+            border: none;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .add-to-cart-btn {
+            padding: 15px 50px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .product-tabs {
+            margin-top: 50px;
+        }
+        .nav-tabs {
+            border-bottom: 2px solid #E4EDF1;
+        }
+        .nav-tabs .nav-link {
+            color: #74909B;
+            font-weight: 500;
+            padding: 15px 30px;
+            border: none;
+            border-bottom: 3px solid transparent;
+        }
+        .nav-tabs .nav-link.active {
+            color: #74909B;
+            border-bottom-color: #74909B;
+            background: transparent;
+        }
+        .tab-content {
+            padding: 30px 0;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #74909B;
+            font-weight: bold;
+        }
+        .review-item {
+            border-bottom: 1px solid #E4EDF1;
+            padding: 20px 0;
+        }
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .review-author {
+            font-weight: 600;
+            color: #74909B;
+        }
+        .review-date {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        .related-products {
+            margin-top: 80px;
+        }
+        .size-selector {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .size-option {
+            padding: 10px 20px;
+            border: 2px solid #E4EDF1;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+        .size-option:hover,
+        .size-option.active {
+            border-color: #74909B;
+            background: #E4EDF1;
+        }
+        /* Nuevos estilos para grid de tamaños */
+        .size-options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        .size-option-item {
+            position: relative;
+        }
+        .size-input {
+            display: none;
+        }
+        .size-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 12px;
+            border: 2px solid #E4EDF1;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            min-height: 100px;
+        }
+        .size-input:checked + .size-label {
+            border-color: #74909B;
+            background: #E4EDF1;
+            font-weight: 600;
+            box-shadow: 0 0 0 3px rgba(116, 144, 155, 0.1);
+        }
+        .size-label:hover {
+            border-color: #74909B;
+            background: #f5f5f5;
+        }
+        .size-text {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .size-sublabel {
+            display: block;
+            font-size: 0.75rem;
+            color: #999;
+            font-weight: normal;
+        }
+        .size-price {
+            display: block;
+            font-size: 0.9rem;
+            color: #74909B;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        .wishlist-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid #E4EDF1;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+        .wishlist-btn:hover {
+            background: #74909B;
+            border-color: #74909B;
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .product-title {
+                font-size: 1.8rem;
+            }
+            .product-images {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body class="bg-body product-detail-page">
+    <!-- SVG Icons -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol xmlns="http://www.w3.org/2000/svg" id="navbar-icon" viewBox="0 0 16 16">
+            <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="heart" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </symbol>
+    </svg>
+
+    <!-- Header -->
+    <header id="header" class="site-header text-black bg-primary">
+        <nav id="header-nav" class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand brand-text" href="index.html">
+                    <span class="brand-name">Munish Perfum</span>
+                </a>
+                <button class="navbar-toggler d-flex d-lg-none order-3 p-2 border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar">
+                    <svg class="navbar-icon" width="50" height="50">
+                        <use xlink:href="#navbar-icon"></use>
+                    </svg>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar">
+                    <div class="offcanvas-header px-4 pb-0">
+                        <a class="navbar-brand brand-text" href="index.html">
+                            <span class="brand-name">Munish Perfum</span>
+                        </a>
+                        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 gap-5 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link p-0" href="index.html" data-i18n="nav-inicio">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-0" href="index.html#overview" data-i18n="nav-nosotros">Nosotros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-0" href="shop.html" data-i18n="nav-tienda">Tienda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-0" href="index.html#testimonials" data-i18n="nav-testimonios">Testimonios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-0" href="index.html#faqs" data-i18n="nav-preguntas">Preguntas</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="d-inline-flex align-items-center gap-2 ms-3">
+                    <button class="lang-toggle" aria-label="Idioma">EN</button>
+                    <button class="theme-toggle" aria-label="Modo oscuro">🌙</button>
+                    <a href="cart.html" onclick="try{updateCartBadge();}catch(e){}" class="cart-link d-inline-flex align-items-center" aria-label="Carrito">
+                        <span class="cart-icon me-2">🛒</span>
+                        <span class="cart-badge">0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="container py-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" data-i18n="breadcrumb-home">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="shop.html" data-i18n="breadcrumb-shop">Tienda</a></li>
+                <li class="breadcrumb-item active" aria-current="page" data-i18n="breadcrumb-product">Esencia Premium</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Product Detail -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Product Images -->
+                <div class="col-lg-6 mb-4">
+                    <div class="product-images">
+                        <div class="position-relative">
+                            <div class="wishlist-btn" onclick="toggleWishlist()">
+                                <svg width="24" height="24">
+                                    <use xlink:href="#heart"></use>
+                                </svg>
+                            </div>
+                            <div class="main-image">
+                                <img id="mainImage" src="images/product-item1.jpg" alt="Producto">
+                            </div>
+                        </div>
+                        <div class="thumbnail-container thumbnail-images">
+                            <!-- Galería de miniaturas inyectada por product.js -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="col-lg-6">
+                    <div class="product-info">
+                        <h1 class="product-title text-uppercase" data-i18n="product-name">Esencia Premium</h1>
+                        <p class="product-category text-muted mb-2"></p>
+
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="text-muted review-count" data-i18n="product-reviews">(24 reseñas)</span>
+                        </div>
+
+                        <div class="product-price current-price">$290</div>
+                        <span class="stock-status in-stock stock-info" data-i18n="product-stock">En Stock - 15 unidades disponibles</span>
+
+                        <p class="product-description my-4 fs-5" data-i18n="product-description">
+                            Una fragancia cautivadora que combina notas florales y amaderadas, creando una experiencia sensorial única. Perfecta para cualquier ocasión, esta esencia premium te acompañará durante todo el día con su larga duración.
+                        </p>
+
+                        <!-- Selector de variantes (Decants y Botella Completa) -->
+                        <div class="mb-4">
+                            <label class="mb-3 fw-bold d-block" data-i18n="product-select-size">Seleccionar Tamaño:</label>
+                            <div class="size-options-grid">
+                                <div class="size-option-item">
+                                    <input type="radio" id="size-botella-completa" name="size-option" value="botella-completa" class="size-input" checked>
+                                    <label for="size-botella-completa" class="size-label">
+                                        <span class="size-text" data-i18n="product-size-bottle">Botella Completa</span>
+                                        <span class="size-sublabel" data-i18n="product-size-bottle-sublabel">(50ml - 100ml)</span>
+                                    </label>
+                                </div>
+                                <div class="size-option-item">
+                                    <input type="radio" id="size-decant-2ml" name="size-option" value="decant-2ml" class="size-input">
+                                    <label for="size-decant-2ml" class="size-label">
+                                        <span class="size-text" data-i18n="product-size-decant-2ml">Decant 2ml</span>
+                                        <span class="size-price">₡1,200</span>
+                                    </label>
+                                </div>
+                                <div class="size-option-item">
+                                    <input type="radio" id="size-decant-3ml" name="size-option" value="decant-3ml" class="size-input">
+                                    <label for="size-decant-3ml" class="size-label">
+                                        <span class="size-text" data-i18n="product-size-decant-3ml">Decant 3ml</span>
+                                        <span class="size-price">₡1,600</span>
+                                    </label>
+                                </div>
+                                <div class="size-option-item">
+                                    <input type="radio" id="size-decant-5ml" name="size-option" value="decant-5ml" class="size-input">
+                                    <label for="size-decant-5ml" class="size-label">
+                                        <span class="size-text" data-i18n="product-size-decant-5ml">Decant 5ml</span>
+                                        <span class="size-price">₡2,100</span>
+                                    </label>
+                                </div>
+                                <div class="size-option-item">
+                                    <input type="radio" id="size-decant-10ml" name="size-option" value="decant-10ml" class="size-input">
+                                    <label for="size-decant-10ml" class="size-label">
+                                        <span class="size-text" data-i18n="product-size-decant-10ml">Decant 10ml</span>
+                                        <span class="size-price">₡4,000</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quantity and Add to Cart -->
+                        <div class="quantity-selector">
+                            <label class="fw-bold" data-i18n="product-quantity">Cantidad:</label>
+                            <div class="quantity-control">
+                                <button onclick="decreaseQuantity()">-</button>
+                                <input type="number" id="quantity" value="1" min="1" max="15" readonly>
+                                <button onclick="increaseQuantity()">+</button>
+                            </div>
+                        </div>
+
+                        <!-- BOTÓN CORREGIDO: Cambiado add-to-cart-btn a btn-add-to-cart -->
+                        <button type="button" class="btn btn-dark btn-lg btn-add-to-cart w-100 mb-3" data-i18n="product-add-to-cart">
+                            Añadir al carrito
+                        </button>
+
+                        <button class="btn btn-outline-dark btn-lg w-100" onclick="buyNow()" data-i18n="product-buy-now">
+                            Comprar Ahora
+                        </button>
+
+                        <!-- Product Features -->
+                        <div class="mt-5">
+                            <h5 class="mb-3 text-uppercase" data-i18n="product-features">Características:</h5>
+                            <ul class="feature-list">
+                                <li data-i18n="product-feature-authentic">Fragancia 100% auténtica y original</li>
+                                <li data-i18n="product-feature-longevity">Larga duración de 8-12 horas</li>
+                                <li data-i18n="product-feature-top-notes">Notas de salida: Bergamota, Limón</li>
+                                <li data-i18n="product-feature-heart-notes">Notas de corazón: Jasmín, Rosa</li>
+                                <li data-i18n="product-feature-base-notes">Notas de fondo: Ámbar, Vainilla</li>
+                                <li data-i18n="product-feature-concentration">Concentración: Eau de Parfum</li>
+                                <li data-i18n="product-feature-shipping">Envío gratuito en compras superiores a $100</li>
+                            </ul>
+                        </div>
+
+                        <!-- Shipping Info -->
+                        <div class="alert alert-info mt-4" data-i18n="product-shipping-info">
+                            <strong data-i18n="product-shipping-label">Envío:</strong> Entrega en 3-5 días hábiles. Envío gratis en compras sobre $100.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Tabs -->
+            <div class="product-tabs mt-5">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" data-i18n="product-tab-description">
+                            Descripción
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" data-i18n="product-tab-info">
+                            Información Adicional
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" data-i18n="product-tab-reviews">
+                            Reseñas (24)
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="description">
+                        <h4 class="mb-4" data-i18n="product-desc-title">Descripción del Producto</h4>
+                        <div class="long-description">
+                            <p data-i18n="product-desc-p1">Esencia Premium es una fragancia sofisticada que encapsula la elegancia y el lujo en cada gota. Creada para quienes aprecian las fragancias de alta calidad, esta composición única combina ingredientes cuidadosamente seleccionados de todo el mundo.</p>
+                            <p data-i18n="product-desc-p2">Las notas de salida frescas y cítricas te dan la bienvenida con bergamota y limón, creando una primera impresión vibrante y energética. A medida que la fragancia se desarrolla, emergen las notas de corazón con un bouquet floral de jasmín y rosa, aportando feminidad y elegancia.</p>
+                            <p data-i18n="product-desc-p3">Finalmente, las notas de fondo de ámbar y vainilla proporcionan una base cálida y sensual que perdura en la piel, dejando un rastro memorable que no pasa desapercibido.</p>
+                            <h5 class="mt-4 mb-3" data-i18n="product-ideal-for">Ideal para:</h5>
+                            <ul>
+                                <li data-i18n="product-ideal-1">Uso diario y ocasiones especiales</li>
+                                <li data-i18n="product-ideal-2">Todas las estaciones, especialmente primavera y verano</li>
+                                <li data-i18n="product-ideal-3">Día y noche</li>
+                                <li data-i18n="product-ideal-4">Personas que buscan una fragancia versátil y elegante</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="info">
+                        <h4 class="mb-4" data-i18n="product-info-title">Información Adicional</h4>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td><strong data-i18n="product-info-brand">Marca:</strong></td>
+                                    <td>Fraganze</td>
+                                </tr>
+                                <tr>
+                                    <td><strong data-i18n="product-info-type">Tipo:</strong></td>
+                                    <td>Eau de Parfum</td>
+                                </tr>
+                                <tr>
+                                    <td><strong data-i18n="product-info-gender">Género:</strong></td>
+                                    <td>Unisex</td>
+                                </tr>
+                                <tr>
+                                    <td><strong data-i18n="product-info-sizes">Tamaños Disponibles:</strong></td>
+                                    <td>50ml, 100ml</td>
+                                </tr>
+                                <tr>
+                                    <td><strong data-i18n="product-info-concentration">Concentración:</strong></td>
+                                    <td>15-20% de aceites aromáticos</td>
+                                </tr>
+                                <tr>
+                                    <td><strong data-i18n="product-info-duration">Duración:</strong></td>
+                                    <td>8-12 horas</td>
+                                </tr>
+                                <tr>
+                                    <td><strong data-i18n="product-info-family">Familia Olfativa:</strong></td>
+                                    <td>Floral-Amaderada</td>
+                                </tr>
+                                <tr>
+                                    <td><strong data-i18n="product-info-origin">País de Origen:</strong></td>
+                                    <td>Francia</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h5 class="mt-4" data-i18n="product-usage-title">Instrucciones de Uso:</h5>
+                        <p data-i18n="product-usage-text">Aplicar sobre la piel limpia, preferiblemente después del baño. Rociar en puntos de pulso como muñecas, cuello, detrás de las orejas y en la parte interna de los codos para mayor duración y proyección.</p>
+                        
+                        <h5 class="mt-4" data-i18n="product-storage-title">Almacenamiento:</h5>
+                        <p data-i18n="product-storage-text">Conservar en un lugar fresco y seco, alejado de la luz solar directa y fuentes de calor. Mantener el frasco bien cerrado cuando no esté en uso.</p>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="reviews">
+                        <h4 class="mb-4" data-i18n="product-reviews-title">Reseñas de Clientes</h4>
+                        
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div>
+                                    <span class="review-author" data-i18n="product-review-author-1">María González</span>
+                                    <div class="stars" style="color: #FFD700;">★★★★★</div>
+                                </div>
+                                <span class="review-date" data-i18n="product-review-date-1">15 de Diciembre, 2023</span>
+                            </div>
+                            <p data-i18n="product-review-text-1">¡Absolutamente increíble! Esta fragancia supera todas mis expectativas. La duración es excepcional y recibo cumplidos constantemente. Definitivamente volveré a comprar.</p>
+                        </div>
+
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div>
+                                    <span class="review-author" data-i18n="product-review-author-2">Carlos Rodríguez</span>
+                                    <div class="stars" style="color: #FFD700;">★★★★★</div>
+                                </div>
+                                <span class="review-date" data-i18n="product-review-date-2">10 de Diciembre, 2023</span>
+                            </div>
+                            <p data-i18n="product-review-text-2">La mejor inversión en fragancias que he hecho. El aroma es sofisticado sin ser abrumador. Perfecto para el trabajo y para salir por la noche.</p>
+                        </div>
+
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div>
+                                    <span class="review-author" data-i18n="product-review-author-3">Ana Martínez</span>
+                                    <div class="stars" style="color: #FFD700;">★★★★☆</div>
+                                </div>
+                                <span class="review-date" data-i18n="product-review-date-3">5 de Diciembre, 2023</span>
+                            </div>
+                            <p data-i18n="product-review-text-3">Me encanta el aroma, es elegante y versátil. Solo le doy 4 estrellas porque esperaba que durara un poco más, pero en general estoy muy satisfecha con la compra.</p>
+                        </div>
+
+                        <div class="mt-4">
+                            <h5 data-i18n="product-review-form-title">Deja tu reseña</h5>
+                            <form onsubmit="submitReview(event)">
+                                <div class="mb-3">
+                                    <label class="form-label" data-i18n="product-review-form-rating">Tu calificación</label>
+                                    <div class="stars" id="ratingStars" style="font-size: 1.5rem; cursor: pointer; color: #ddd;">
+                                        <span onclick="rate(1)">★</span>
+                                        <span onclick="rate(2)">★</span>
+                                        <span onclick="rate(3)">★</span>
+                                        <span onclick="rate(4)">★</span>
+                                        <span onclick="rate(5)">★</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" data-i18n="product-review-form-name">Tu nombre</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" data-i18n="product-review-form-review">Tu reseña</label>
+                                    <textarea class="form-control" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-dark" data-i18n="product-review-form-submit">Enviar Reseña</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div class="related-products">
+                <h3 class="text-center mb-5 text-uppercase" data-i18n="product-related-title">Productos Relacionados</h3>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="product-card">
+                            <div class="image-holder position-relative zoom-effect">
+                                <a href="single-product.html?id=2">
+                                    <img src="images/product-item2.jpg" alt="Perfume" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="card-detail mt-3 text-center">
+                                <h3 class="card-title fs-6 mb-2">
+                                    <a href="single-product.html?id=2" class="text-secondary text-uppercase" data-i18n="product-related-1">Elegancia Floral</a>
+                                </h3>
+                                <div class="card-price text-secondary fs-5">$290</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="product-card">
+                            <div class="image-holder position-relative zoom-effect">
+                                <a href="single-product.html?id=3">
+                                    <img src="images/product-item3.jpg" alt="Perfume" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="card-detail mt-3 text-center">
+                                <h3 class="card-title fs-6 mb-2">
+                                    <a href="single-product.html?id=3" class="text-secondary text-uppercase" data-i18n="product-related-2">Aroma Exclusivo</a>
+                                </h3>
+                                <div class="card-price text-secondary fs-5">$290</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="product-card">
+                            <div class="image-holder position-relative zoom-effect">
+                                <a href="single-product.html?id=4">
+                                    <img src="images/product-item1.jpg" alt="Perfume" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="card-detail mt-3 text-center">
+                                <h3 class="card-title fs-6 mb-2">
+                                    <a href="single-product.html?id=4" class="text-secondary text-uppercase" data-i18n="product-related-3">Mística Oriental</a>
+                                </h3>
+                                <div class="card-price text-secondary fs-5">$310</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="product-card">
+                            <div class="image-holder position-relative zoom-effect">
+                                <a href="single-product.html?id=5">
+                                    <img src="images/product-item2.jpg" alt="Perfume" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="card-detail mt-3 text-center">
+                                <h3 class="card-title fs-6 mb-2">
+                                    <a href="single-product.html?id=5" class="text-secondary text-uppercase" data-i18n="product-related-4">Brisa Marina</a>
+                                </h3>
+                                <div class="card-price text-secondary fs-5">$275</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+       <!-- Footer -->
+    <footer class="py-5 bg-linear">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-4 mb-4">
+            <h5 class="text-uppercase mb-3" data-i18n="footer-brand">Munish Perfum</h5>
+            <p data-i18n="footer-desc">Tu destino para fragancias exclusivas de lujo. Calidad premium garantizada.</p>
+          </div>
+
+          <div class="col-md-4 mb-4">
+            <h5 class="text-uppercase mb-3" data-i18n="footer-links">Enlaces</h5>
+            <ul class="list-unstyled">
+              <li><a href="index.html" data-i18n="footer-link-home">Inicio</a></li>
+              <li><a href="shop.html" data-i18n="footer-link-shop">Tienda</a></li>
+              <li><a href="index.html#overview" data-i18n="footer-link-about">Nosotros</a></li>
+              <li><a href="index.html#faqs" data-i18n="footer-link-faqs">Preguntas</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-4 mb-4">
+            <h5 class="text-uppercase mb-3" data-i18n="footer-contact">Contacto</h5>
+            <p data-i18n="footer-contact-info">
+              Email: munishperfum@gmail.com<br>
+              Tel: +506 8445 3904
+            </p>
+          </div>
+
+        </div>
+
+        <div class="text-center pt-4">
+          <p class="mb-0" data-i18n="footer-text">© 2026 Munish Perfum. Diseñado con ❤️ para amantes de las fragancias exclusivas.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts en orden correcto -->
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/api-products.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/product.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Comprar ahora: añade al carrito y redirige a checkout
+        window.buyNow = function(){
+            // Simular click en el botón de añadir al carrito
+            const btn = document.querySelector('.btn-add-to-cart');
+            if(btn) {
+                btn.click();
+            }
+            
+            // Dar tiempo para que se guarde en localStorage y luego redirigir
+            setTimeout(function(){ 
+                window.location.href = 'checkout.html'; 
+            }, 300);
+        };
+    </script>
+  </body>
+</html>
